@@ -1,0 +1,28 @@
+nav {
+    display: flex;
+    justify-content: right;
+    height: 50px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    font-family: Candara;
+    font-size: 18px;
+    flex-direction: row;
+    height: 30px;
+}
+
+li {
+    padding: 10px;
+}
+
+li:hover, a:hover{
+    text-shadow: 2px 5px 5px gray;
+    font-weight: 800;
+    color: white;
+}
+a:active, a:visited, a:link {
+    text-decoration:none;
+    color:white;
+}
