@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 
 def sign_in(request):
     if request.method == 'POST':
@@ -21,7 +22,8 @@ def sign_up(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.groups.add(Group.objects.get(name = 'user'))
             return redirect('sign_in')
     else:
         form = UserCreationForm()
