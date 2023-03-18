@@ -2,18 +2,18 @@ from django.db.models.query import QuerySet
 from ..models import Band
 
 class BandRepository():
-    def get_bands() -> QuerySet[dict]:
+    def get_bands(self) -> QuerySet[dict]:
         return Band.object.all().values()
 
-    def get_band_by_id(id: int) -> Band:
+    def get_band_by_id(self, id: int) -> Band:
         return Band.objects.get(id=id)
 
-    def add_band(band: Band) -> None:
+    def add_band(self, band: Band) -> None:
         band.save()
 
-    def update_band(band: Band) -> None:
+    def update_band(self, band: Band) -> None:
         band.save()
 
-    def delete_band(id: int) -> None:
-        Band.delete(Band.objects.get(id=id))
+    def delete_band(self, band: Band) -> None:
+        Band.delete(band)
 
