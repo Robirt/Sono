@@ -33,6 +33,32 @@
     <Compile Include="app\apps.py" />
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="app\models.py" />
+    <Compile Include="app\repositories\album_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\repositories\band_member_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\repositories\band_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\repositories\genre_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\repositories\product_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\repositories\rental_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\repositories\song_repository.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\services\album_service.py" />
+    <Compile Include="app\services\band_service.py" />
+    <Compile Include="app\services\genre_service.py" />
+    <Compile Include="app\services\product_service.py" />
+    <Compile Include="app\services\rental_service.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="manage.py" />
@@ -51,6 +77,8 @@
     <Folder Include="app\static\fonts\" />
     <Folder Include="app\static\fonts\css\" />
     <Folder Include="app\static\fonts\font\" />
+    <Folder Include="app\services\" />
+    <Folder Include="app\repositories\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="Sono\" />
