@@ -74,6 +74,7 @@
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\photo\" />
     <Folder Include="app\static\app\styles\" />
+    <Folder Include="app\static\app\styles\songs\" />
     <Folder Include="app\static\fonts\" />
     <Folder Include="app\static\fonts\css\" />
     <Folder Include="app\static\fonts\font\" />
@@ -81,6 +82,7 @@
     <Folder Include="app\repositories\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="app\templates\app\songs\" />
     <Folder Include="Sono\" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +95,7 @@
     <Content Include="app\static\app\styles\navmenu.css" />
     <Content Include="app\static\app\styles\signin.css" />
     <Content Include="app\static\app\styles\signup.css" />
+    <Content Include="app\static\app\styles\songs\songslist.css" />
     <Content Include="app\static\fonts\css\animation.css" />
     <Content Include="app\static\fonts\css\fontello-codes.css" />
     <Content Include="app\static\fonts\css\fontello-embedded.css" />
@@ -112,6 +115,7 @@
     <Content Include="app\templates\app\navmenu.html" />
     <Content Include="app\templates\app\signin.html" />
     <Content Include="app\templates\app\signup.html" />
+    <Content Include="app\templates\app\songs\songslist.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

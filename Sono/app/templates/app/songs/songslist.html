@@ -1,0 +1,10 @@
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/styles/songs/songslist.css' %}" />
+{% endblock %}
+
+<ul>
+    {% for song in songs %}
+    <li>{{ song.title }}</li>
+    {% endfor %}
+</ul>
