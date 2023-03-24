@@ -1,0 +1,15 @@
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/navmenu.css' %}" />
+{% endblock %}
+<nav>
+    <ul>
+        <li><a href="{% url 'about' %}">O nas</a></li>
+        <li>Katalog</li>
+        <li>Zarezerwowane</li>
+        <li>Wypożyczone</li>
+        <li><a href="{% url 'contact' %}">Kontakt</a></li>
+        <li>Mój profil</li>
+        <li><a href="{% url 'signin' %}">Zaloguj się</a></li>
+    </ul>
+</nav>

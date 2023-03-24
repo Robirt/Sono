@@ -10,7 +10,7 @@ def sign_in(request):
             login(request, user)
             return redirect('')
         else:
-            return render(request, 'signin.html', {'error_message':'Nieprawid³owy login lub has³o'})
+            return render(request, 'signin.html', {'error_message':'Nieprawidï¿½owy login lub hasï¿½o'})
     else:
         return render(request, 'signin.html')
 
@@ -28,3 +28,38 @@ def sign_up(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+=======
+def home(request):
+    return render(
+        request,
+        'app/home.html'
+        )
+
+def signin(request):
+    return render(
+        request,
+        'app/signin.html'
+        )
+
+def signup(request):
+    return render(
+        request,
+        'app/signup.html'
+        )
+
+def catalog(request):
+    return render(
+        request,
+        'app/catalog.html'
+        )
+
+def about(request):
+    return render(
+        request,
+        'app/about.html'
+        )
+def contact(request):
+    return render(
+        request,
+        'app/contact.html'
+        )

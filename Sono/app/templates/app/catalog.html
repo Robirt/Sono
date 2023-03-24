@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'app/styles/catalog.html' %}" />
+{% endblock %}
+{% block content %}
+    <section>
+        {% for album in albums %}
+        <a href="{% url 'signin' id=album.id %}">
+            <figure>
+                <img src="data:image/jpeg;base64, {{ album.cover|base64 }}" />
+                <figcaption>
+                    <h4>{{ album.name }}</h4>
+                    <h5>{{ album.author }}</h5>
+                </figcaption>
+            </figure>
+        </a>
+        {% endfor %}
+    </section>
+{% endblock %}
