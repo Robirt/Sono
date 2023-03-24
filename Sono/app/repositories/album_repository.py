@@ -2,17 +2,17 @@ from django.db.models.query import QuerySet
 from ..models import Album
 
 class AlbumRepository():
-    def get_Albums() -> QuerySet[dict]:
+    def get_albums() -> QuerySet[dict]:
         return Album.object.all().values()
 
-    def get_Album_by_id(id: int) -> Album:
+    def get_album_by_id(id: int) -> Album:
         return Album.objects.get(id=id)
 
-    def add_Album(album: Album) -> None:
+    def add_album(album: Album) -> None:
         album.save()
 
-    def update_Album(album: Album) -> None:
+    def update_album(album: Album) -> None:
         album.save()
 
-    def delete_Album(id: int) -> None:
+    def delete_album(id: int) -> None:
         Album.delete(Album.objects.get(id=id))
