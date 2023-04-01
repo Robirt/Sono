@@ -28,7 +28,7 @@ def sign_up(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
-=======
+
 def home(request):
     return render(
         request,
@@ -58,6 +58,7 @@ def about(request):
         request,
         'app/about.html'
         )
+
 def contact(request):
     return render(
         request,
