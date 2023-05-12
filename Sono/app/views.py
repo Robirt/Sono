@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
+from .services.album_service import AlbumService
+
+albumService: AlbumService = AlbumService();
 
 def sign_in(request):
     if request.method == 'POST':
@@ -48,9 +51,11 @@ def signup(request):
         )
 
 def catalog(request):
+    albums = albumService.get_albums()
     return render(
         request,
-        'app/catalog.html'
+        'app/catalog.html',
+        {'albums' : albums }
         )
 
 def about(request):

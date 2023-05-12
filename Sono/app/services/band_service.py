@@ -3,7 +3,7 @@ from ..repositories.band_repository import BandRepository
 from ..models import Band
 
 class BandService():
-    def get_bands(self) -> QuerySet[dict]:
+    def get_bands(self):
         return BandRepository.get_bands()
 
     def search_bands_by_name(self, search_string: str) -> QuerySet[Band]:

@@ -1,20 +1,19 @@
 {% extends "app/layout.html" %}
 {% load static %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'app/styles/catalog.html' %}" />
-{% endblock %}
 {% block content %}
-    <section>
-        {% for album in albums %}
-        <a href="{% url 'signin' id=album.id %}">
-            <figure>
-                <img src="data:image/jpeg;base64, {{ album.cover|base64 }}" />
-                <figcaption>
-                    <h4>{{ album.name }}</h4>
-                    <h5>{{ album.author }}</h5>
-                </figcaption>
-            </figure>
-        </a>
-        {% endfor %}
-    </section>
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/styles/catalog.css' %}" />
 {% endblock %}
+<section>
+    {% for album in albums %}
+    <figure>
+        <img src="{{ album.cover.url }}" alt="Album Cover">
+        <figcaption>
+            <h4>{{ album.title }}</h4>
+            <h5>{{ album.band.name }}</h5>
+        </figcaption>
+    </figure>
+    {% endfor %}
+</section>
+
+{% endblock %} 
