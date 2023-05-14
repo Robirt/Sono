@@ -1,0 +1,32 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'app/styles/genres.css' %}" />
+    {% endblock %}
+
+    <section>
+        <table>
+            <thead>
+                <tr><th>Name</th></tr>
+            </thead>
+            <tbody>
+                {% for genre in genres %}
+                    <tr><td>{{ genre.name }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <form method="post">
+            <input type="text" name="genre_id" value="{{ genre.id }}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="Add">Add Genre</button>
+            <button type="submit" name="Update">Update</button>
+            <button type="submit" name="Remove">Remove</button>
+        </form>
+    </section>
+{% endblock %}

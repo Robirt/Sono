@@ -1,0 +1,33 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/styles/about.css' %}" />
+    {% endblock %}
+
+<section>
+    <table>
+        <thead>
+            <tr><th>Tytul</th></tr>
+            <tr><th>Album</th></tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+            <tr><td>{{ song.title }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+<section>
+    <form method="post">
+        <input type="text" name="song_id" value="{{ song.id }}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="Add">Add Song</button>
+        <button type="submit" name="Update">Update</button>
+        <button type="submit" name="Remove">Remove</button>
+    </form>
+</section>
+{% endblock %}

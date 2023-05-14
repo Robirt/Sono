@@ -12,7 +12,7 @@ class GenreService():
     def get_genre_by_name(self, name: str) -> Genre:
         return self.get_genres().filter(name = name)
    
-    def add_genre(self, genre: Genre) -> None:
+    def add_genre(self, genre) -> None:
         GenreRepository.add_genre(genre)
         
     def update_genre(self, genre: Genre) -> None:
