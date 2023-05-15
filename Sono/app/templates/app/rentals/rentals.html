@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/rentals.css' %}" />
+    {% endblock %}
+
+<section>
+    <table>
+        <thead>
+            <tr><th>Name</th></tr>
+        </thead>
+        <tbody>
+            {% for rental in rentals %}
+            <tr><td>{{ rental.reservation_date }}</td></tr>
+            <tr><td>{{ rental.reservation_expire_date }}</td></tr>
+            <tr><td>{{ rental.return_date }}</td></tr>
+            <tr><td>{{ rental.renter }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+<section>
+    <form method="post">
+        <input type="text" name="rental_id" value="{{ rental.id }}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="Add">Add Rental</button>
+        <button type="submit" name="Update">Update</button>
+        <button type="submit" name="Remove">Remove</button>
+    </form>
+</section>
+{% endblock %}

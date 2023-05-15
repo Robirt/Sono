@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/bandMembers.css' %}" />
+    {% endblock %}
+
+<section>
+    <table>
+        <thead>
+            <tr><th>Name</th></tr>
+        </thead>
+        <tbody>
+            {% for bandMember in bandMembers %}
+            <tr><td>{{ bandMember.first_name }}</td></tr>
+            <tr><td>{{ bandMember.last_name }}</td></tr>
+            <tr><td>{{ bandMember.role }}</td></tr>
+            <tr><td>{{ bandMember.band }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+<section>
+    <form method="post">
+        <input type="text" name="bandMember_id" value="{{ bandMember.id }}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="Add">Add BandMember</button>
+        <button type="submit" name="Update">Update</button>
+        <button type="submit" name="Remove">Remove</button>
+    </form>
+</section>
+{% endblock %}

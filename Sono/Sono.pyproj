@@ -31,7 +31,12 @@
   <ItemGroup>
     <Compile Include="app\admin.py" />
     <Compile Include="app\apps.py" />
+    <Compile Include="app\controllers\album_controller.py" />
+    <Compile Include="app\controllers\bandMember_controller.py" />
+    <Compile Include="app\controllers\band_controller.py" />
     <Compile Include="app\controllers\genre_controller.py" />
+    <Compile Include="app\controllers\product_controller.py" />
+    <Compile Include="app\controllers\rental_controller.py" />
     <Compile Include="app\controllers\song_controller.py" />
     <Compile Include="app\forms.py" />
     <Compile Include="app\migrations\__init__.py" />
@@ -88,6 +93,11 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="app\templates\app\genres\" />
+    <Folder Include="app\templates\app\albums\" />
+    <Folder Include="app\templates\app\band\" />
+    <Folder Include="app\templates\app\bandsMember\" />
+    <Folder Include="app\templates\app\products\" />
+    <Folder Include="app\templates\app\rentals\" />
     <Folder Include="app\templates\app\songs\" />
     <Folder Include="Sono\" />
   </ItemGroup>
@@ -114,12 +124,17 @@
     <Content Include="app\static\fonts\font\fontello.woff" />
     <Content Include="app\static\fonts\font\fontello.woff2" />
     <Content Include="app\templates\app\about.html" />
+    <Content Include="app\templates\app\albums\albums.html" />
+    <Content Include="app\templates\app\bandsMember\bandsMember.html" />
+    <Content Include="app\templates\app\band\bands.html" />
     <Content Include="app\templates\app\contact.html" />
     <Content Include="app\templates\app\genres\genres.html" />
     <Content Include="app\templates\app\home.html" />
     <Content Include="app\templates\app\catalog.html" />
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\navmenu.html" />
+    <Content Include="app\templates\app\products\products.html" />
+    <Content Include="app\templates\app\rentals\rentals.html" />
     <Content Include="app\templates\app\signin.html" />
     <Content Include="app\templates\app\signup.html" />
     <Content Include="app\templates\app\songs\songs.html" />

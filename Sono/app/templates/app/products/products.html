@@ -4,29 +4,29 @@
 
 {% block content %}
     {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'app/styles/about.css' %}" />
+<link rel="stylesheet" href="{% static 'app/styles/products.css' %}" />
     {% endblock %}
 
 <section>
     <table>
         <thead>
-            <tr><th>Tytul</th></tr>
-            <tr><th>Album</th></tr>
+            <tr><th>Name</th></tr>
         </thead>
         <tbody>
-            {% for song in songs %}
-            <tr><td>{{ song.title }}</td></tr>
-            <tr><td>{{ song.album}}</td></tr>
+            {% for product in products %}
+            <tr><td>{{ product.album }}</td></tr>
+            <tr><td>{{ product.code }}</td></tr>
+            <tr><td>{{ product.rental }}</td></tr>
             {% endfor %}
         </tbody>
     </table>
 </section>
 <section>
     <form method="post">
-        <input type="text" name="song_id" value="{{ song.id }}">
+        <input type="text" name="product_id" value="{{ product.id }}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" name="Add">Add Song</button>
+        <button type="submit" name="Add">Add Product</button>
         <button type="submit" name="Update">Update</button>
         <button type="submit" name="Remove">Remove</button>
     </form>
