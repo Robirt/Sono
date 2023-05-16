@@ -11,24 +11,20 @@ def rentals(request):
     form = RentalForm()
 
     if request.method == 'POST':
-        if 'Update' in request.POST:
-            rental_id = request.POST.get('rental_id')
-            rental = Rental.objects.get(id=rental_id)
-            form = RentalForm(request.POST, instance=rental)
-            if form.is_valid():
-                form.save()
-                return redirect('rentals')
-
-        elif 'Remove' in request.POST:
-            rental_id = request.POST.get('rental_id')
-            rental = Rental.objects.get(id=rental_id)
-            rental.delete()
-            return redirect('rentals')
-
-        elif 'Add' in request.POST:
+        if 'add' in request.POST:
             form = RentalForm(request.POST)
             if form.is_valid():
-                form.save()
+                rental_service.add_rental(form.save(commit=False))
                 return redirect('rentals')
+
+        if 'update' in request.POST:
+            form = RentalForm(request.POST, instance = rental_service.get_rental_by_id(request.POST['id']))
+            if form.is_valid():
+                rental_service.update_rental(form.save(commit=False))
+                return redirect('rentals')
+
+        elif 'delete' in request.POST:
+            rental_service.delete_rental(request.POST['id'])
+            return redirect('rentals')
 
     return render(request, 'app/rentals/rentals.html', {'rentals': rentals, 'form': form})

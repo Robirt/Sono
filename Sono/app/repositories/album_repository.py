@@ -5,14 +5,14 @@ class AlbumRepository():
     def get_albums():
         return list(Album.objects.all().prefetch_related('band'))
 
-    def get_album_by_id(id: int) -> Album:
+    def get_album_by_id(self, id: int) -> Album:
         return Album.objects.get(id=id)
 
-    def add_album(album: Album) -> None:
+    def add_album(self, album: Album) -> None:
         album.save()
 
-    def update_album(album: Album) -> None:
+    def update_album(self, album: Album) -> None:
         album.save()
 
-    def delete_album(id: int) -> None:
-        Album.delete(Album.objects.get(id=id))
+    def delete_album(self, album: Album) -> None:
+        Album.delete(album)

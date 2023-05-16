@@ -5,15 +5,15 @@ class ProductRepository():
     def get_products() -> QuerySet[dict]:
         return Product.object.all().values()
 
-    def get_product_by_id(id: int) -> Product:
+    def get_product_by_id(self, id: int) -> Product:
         return Product.objects.get(id=id)
 
-    def add_product(product: Product) -> None:
+    def add_product(self, product: Product) -> None:
         product.save()
 
-    def update_product(product: Product) -> None:
+    def update_product(self, product: Product) -> None:
         product.save()
 
-    def delete_product(id: int) -> None:
-        Product.delete(Product.objects.get(id=id))
+    def delete_product(self, product: Product) -> None:
+        Product.delete(product)
 

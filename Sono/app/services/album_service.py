@@ -3,24 +3,24 @@ from ..repositories.album_repository import AlbumRepository
 from ..models import Album
 
 class AlbumService():
-    def get_albums(self) -> QuerySet[dict]:
-        return AlbumRepository.get_albums()
+    def __init__(self) -> None:
+        self.album_repository = AlbumRepository()
 
-    def search_albums_by_title(self, search_string: str) -> QuerySet[Album]:
-        return AlbumRepository.get_Albums().filter(title__icontains = search_string)
+    def get_albums(self) -> QuerySet[dict]:
+        return self.album_repository.get_albums()
 
     def get_album_by_id(self, id: int) -> Album:
-        return AlbumRepository.get_album_by_id(id)
+        return self.album_repository.get_album_by_id(id)
 
-    def get_album_by_title(self, title: str) -> Album:
-        return self.get_albums().filter(title = title)
-   
+    def get_album_by_name(self, name: str) -> Album:
+        return self.get_albums().filter(name=name)
+
     def add_album(self, album: Album) -> None:
-        AlbumRepository.add_album(album)
-        
+        self.album_repository.add_album(album)
+
     def update_album(self, album: Album) -> None:
-        AlbumRepository.update_album(album)
+        self.album_repository.update_album(album)
 
     def delete_album(self, id: int) -> None:
-        AlbumRepository.delete_album(self.get_album_by_id(id))
+        self.album_repository.delete_album(self.get_album_by_id(id))
 

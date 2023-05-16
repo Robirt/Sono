@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from ..models import Band
 
 class BandRepository():
-    def get_bands(self):
+    def get_bands(self) -> QuerySet[dict]:
         return Band.object.all().values()
 
     def get_band_by_id(self, id: int) -> Band:

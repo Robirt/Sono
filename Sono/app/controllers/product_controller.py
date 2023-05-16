@@ -11,24 +11,20 @@ def products(request):
     form = ProductForm()
 
     if request.method == 'POST':
-        if 'Update' in request.POST:
-            product_id = request.POST.get('product_id')
-            product = Product.objects.get(id=product_id)
-            form = ProductForm(request.POST, instance=product)
-            if form.is_valid():
-                form.save()
-                return redirect('products')
-
-        elif 'Remove' in request.POST:
-            product_id = request.POST.get('product_id')
-            product = Product.objects.get(id=product_id)
-            product.delete()
-            return redirect('products')
-
-        elif 'Add' in request.POST:
+        if 'add' in request.POST:
             form = ProductForm(request.POST)
             if form.is_valid():
-                form.save()
+                product_service.add_product(form.save(commit=False))
                 return redirect('products')
+
+        if 'update' in request.POST:
+            form = ProductForm(request.POST, instance = product_service.get_product_by_id(request.POST['id']))
+            if form.is_valid():
+                product_service.update_product(form.save(commit=False))
+                return redirect('products')
+
+        elif 'delete' in request.POST:
+            product_service.delete_product(request.POST['id'])
+            return redirect('products')
 
     return render(request, 'app/products/products.html', {'products': products, 'form': form})
