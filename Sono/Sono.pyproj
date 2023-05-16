@@ -93,7 +93,7 @@
     <Folder Include="app\templates\app\" />
     <Folder Include="app\templates\app\genres\" />
     <Folder Include="app\templates\app\albums\" />
-    <Folder Include="app\templates\app\band\" />
+    <Folder Include="app\templates\app\bands\" />
     <Folder Include="app\templates\app\bandsMember\" />
     <Folder Include="app\templates\app\products\" />
     <Folder Include="app\templates\app\rentals\" />
@@ -126,7 +126,7 @@
     <Content Include="app\templates\app\about.html" />
     <Content Include="app\templates\app\albums\albums.html" />
     <Content Include="app\templates\app\bandsMember\bandsMember.html" />
-    <Content Include="app\templates\app\band\bands.html" />
+    <Content Include="app\templates\app\bands\bands.html" />
     <Content Include="app\templates\app\contact.html" />
     <Content Include="app\templates\app\genres\genres.html" />
     <Content Include="app\templates\app\home.html" />

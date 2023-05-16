@@ -1,6 +1,8 @@
 from django.urls import path
 from django.contrib import admin
 from app import views
+from django.conf import settings
+from django.conf.urls.static import static
 from app.controllers import genre_controller, song_controller, album_controller, rental_controller, product_controller, band_controller
 
 
@@ -19,3 +21,6 @@ urlpatterns = [
     path('rentals/', rental_controller.rentals, name='rentals'),
     path('bands/', band_controller.bands, name='bands'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
