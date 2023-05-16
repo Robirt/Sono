@@ -11,29 +11,29 @@ class GenreForm(forms.ModelForm):
 class SongForm(forms.ModelForm):
     class Meta:
         model = Song
-        fields = ['title'], ['album']
+        fields = ['title', 'album']
 
 class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        fields = ['title'], ['band'], ['cover']
+        fields = ['title', 'band', 'cover']
 
 class BandForm(forms.ModelForm):
     class Meta:
         model = Band
-        fields = ['name'], ['image']
+        fields = ['name', 'image']
 
 class BandMemberForm(forms.ModelForm):
     class Meta:
         model = BandMember
-        fields = ['first_name'], ['last_name'], ['role'], ['band']
+        fields = ['first_name', 'last_name', 'role', 'band']
 
 class RentalForm(forms.ModelForm):
     class Meta:
         model = Rental
-        fields = ['reservation_date'], ['reservation_expire_date'], ['return_date'], ['renter']
+        fields = ['reservation_date', 'reservation_expire_date', 'return_date', 'renter']
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['album'], ['code'], ['rental']
+        fields = ['album', 'code', 'rental']

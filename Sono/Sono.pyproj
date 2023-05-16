@@ -32,7 +32,6 @@
     <Compile Include="app\admin.py" />
     <Compile Include="app\apps.py" />
     <Compile Include="app\controllers\album_controller.py" />
-    <Compile Include="app\controllers\bandMember_controller.py" />
     <Compile Include="app\controllers\band_controller.py" />
     <Compile Include="app\controllers\genre_controller.py" />
     <Compile Include="app\controllers\product_controller.py" />
@@ -109,6 +108,7 @@
     <Content Include="app\static\app\styles\contact.css" />
     <Content Include="app\static\app\styles\layout.css" />
     <Content Include="app\static\app\styles\navmenu.css" />
+    <Content Include="app\static\app\styles\panel.css" />
     <Content Include="app\static\app\styles\signin.css" />
     <Content Include="app\static\app\styles\signup.css" />
     <Content Include="app\static\app\styles\songs\songslist.css" />

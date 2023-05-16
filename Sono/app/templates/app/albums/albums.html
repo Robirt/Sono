@@ -4,7 +4,7 @@
 
 {% block content %}
     {% block css %}
-<link rel="stylesheet" href="{% static 'app/styles/albums.css' %}" />
+        <link rel="stylesheet" href="{% static 'app/styles/albums.css' %}" />
     {% endblock %}
 
 <section>
@@ -14,9 +14,8 @@
         </thead>
         <tbody>
             {% for album in albums %}
-            <tr><td>{{ album.title }}</td></tr>
-            <tr><td>{{ album.band }}</td></tr>
-            <tr><td>{{ album.cover }}</td></tr>
+                <tr><td>{{ album.title }}</td></tr>
+                <tr><td>{{ album.band.name }}</td></tr>
             {% endfor %}
         </tbody>
     </table>

@@ -4,29 +4,64 @@
 
 {% block content %}
     {% block css %}
-        <link rel="stylesheet" href="{% static 'app/styles/genres.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/styles/panel.css' %}" />
     {% endblock %}
 
     <section>
-        <table>
+        <table id="genres-table">
+            <caption>Genres</caption>
             <thead>
-                <tr><th>Name</th></tr>
+                <tr><th>Id</th><th>Name</th></tr>
             </thead>
             <tbody>
                 {% for genre in genres %}
-                    <tr><td>{{ genre.name }}</td></tr>
+                <tr data-id="{{ genre.id }}"><td>{{ genre.id }}</td><td>{{ genre.name }}</td></tr>
                 {% endfor %}
             </tbody>
         </table>
     </section>
     <section>
         <form method="post">
-            <input type="text" name="genre_id" value="{{ genre.id }}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" name="Add">Add Genre</button>
-            <button type="submit" name="Update">Update</button>
-            <button type="submit" name="Remove">Remove</button>
+
+            <div>
+                <label for="id">Id</label>
+                <input type="text" id="id" name="id" value="{{ genre.id.value }}" readonly>
+            </div>
+
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{ form.name.value }}">
+            </div>
+
+            <div>
+                <button type="submit" name="add">Add</button>
+                <button type="submit" name="update">Update</button>
+                <button type="submit" name="delete">Delete</button>
+            </div>
         </form>
     </section>
+
+    <script>
+        var genresTable = document.querySelector('#genres-table');
+        var idInput = document.querySelector('#id');
+        var nameInput = document.querySelector('#name');
+
+        var selectedRow = null;
+
+        genresTable.addEventListener('click', (event) => {
+            const row = event.target.closest('tr');
+            if (row && row.dataset.id) {
+
+                if (selectedRow) selectedRow.classList.remove('selected-row');
+
+                selectedRow = row;
+
+                idInput.value = selectedRow.cells[0].textContent;
+                nameInput.value = selectedRow.cells[1].textContent;
+
+                row.classList.add('selected-row');
+            }
+        });
+    </script>
 {% endblock %}
