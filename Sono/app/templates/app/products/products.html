@@ -4,31 +4,79 @@
 
 {% block content %}
     {% block css %}
-<link rel="stylesheet" href="{% static 'app/styles/products.css' %}" />
+<link rel="stylesheet" href="{% static 'app/styles/panel.css' %}" />
     {% endblock %}
 
 <section>
-    <table>
+    <table id="products-table">
+        <caption>Products</caption>
         <thead>
-            <tr><th>Name</th></tr>
+            <tr><th>Id</th><th>Album</th><th>Code</th><th>Rental</th></tr>
         </thead>
         <tbody>
             {% for product in products %}
-            <tr><td>{{ product.album }}</td></tr>
-            <tr><td>{{ product.code }}</td></tr>
-            <tr><td>{{ product.rental }}</td></tr>
+            <tr data-id="{{product.id}}"><td>{{ product.album }}</td><td>{{ product.code }}</td><td>{{ product.rental }}</td></tr>
             {% endfor %}
         </tbody>
     </table>
 </section>
 <section>
-    <form method="post">
-        <input type="text" name="product_id" value="{{ product.id }}">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="Add">Add Product</button>
-        <button type="submit" name="Update">Update</button>
-        <button type="submit" name="Remove">Remove</button>
+
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="idInput" name="id" value="{{ band.id.value }}" readonly>
+        </div>
+
+        <div>
+            <label for="album">Album</label>
+            <input type="text" id="albumInput" name="album" value="{{ form.album.value }}">
+        </div>
+
+        <div>
+            <label for="code">Code</label>
+            <input type="file" id="codeInput" name="code" value="{{ form.code.value }}">
+        </div>
+
+        <div>
+            <label for="rental">Code</label>
+            <input type="file" id="rentalInput" name="rental" value="{{ form.rental.value }}">
+        </div>
+
+        <div>
+            <button type="submit" name="add">Add</button>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="delete">Delete</button>
+        </div>
     </form>
-</section>
-{% endblock %}
+    </section>
+    <script>
+    var productsTable = document.querySelector('#products-table');
+    var idInput = document.querySelector('#idInput');
+    var albumInput = document.querySelector('#albumInput');
+    var codeInput = document.querySelector("#codeInput");
+    var rentalInput = document.querySelector("#rentalInput");
+
+    var selectedRow = null;
+
+    bandsTable.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        if (row && row.dataset.id) {
+
+            if (selectedRow) selectedRow.classList.remove('selected-row');
+
+            selectedRow = row;
+
+            idInput.value = selectedRow.cells[0].textContent;
+            albumInput.value = selectedRow.cells[1].textContent;
+            codeInput.value = selectedRow.cells[2].textContent;
+            rentalInput.value = selectedRow.cells[3].textContent;
+
+            row.classList.add('selected-row');
+        }
+    });
+
+
+    </script>
+    {% endblock %}

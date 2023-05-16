@@ -4,31 +4,72 @@
 
 {% block content %}
     {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'app/styles/about.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'app/styles/panel.css' %}" />
     {% endblock %}
 
 <section>
-    <table>
+    <table id="songs-table">
+        <caption>Songs</caption>
         <thead>
-            <tr><th>Tytul</th></tr>
-            <tr><th>Album</th></tr>
+            <tr><th>Tytul</th><th>Album</th></tr>
         </thead>
         <tbody>
             {% for song in songs %}
-            <tr><td>{{ song.title }}</td></tr>
-            <tr><td>{{ song.album}}</td></tr>
+            <tr data-id="{{ songs.id }}"><td>{{ song.title }}</td><td>{{ song.album}}</td></tr>
             {% endfor %}
         </tbody>
     </table>
 </section>
 <section>
-    <form method="post">
-        <input type="text" name="song_id" value="{{ song.id }}">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="Add">Add Song</button>
-        <button type="submit" name="Update">Update</button>
-        <button type="submit" name="Remove">Remove</button>
+
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="idInput" name="id" value="{{ songs.id.value }}" readonly>
+        </div>
+
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="titleInput" name="title" value="{{ form.title.value }}">
+        </div>
+
+        <div>
+            <label for="album">Album</label>
+            <input type="text" id="albumInput" name="album" value="{{ form.album.value }}">
+        </div>
+
+        <div>
+            <button type="submit" name="add">Add</button>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="delete">Delete</button>
+        </div>
     </form>
 </section>
+<script>
+    var songsTable = document.querySelector('#songs-table');
+    var idInput = document.querySelector('#idInput');
+    var titleInput = document.querySelector('#titleInput');
+    var albumInput = document.querySelector("#albumInput");
+
+
+    var selectedRow = null;
+
+    songsTable.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        if (row && row.dataset.id) {
+
+            if (selectedRow) selectedRow.classList.remove('selected-row');
+
+            selectedRow = row;
+
+            idInput.value = selectedRow.cells[0].textContent;
+            titleInput.value = selectedRow.cells[1].textContent;
+            albumInput.value = selectedRow.cells[2].textContent;
+
+            row.classList.add('selected-row');
+        }
+    });
+
+</script>
 {% endblock %}
