@@ -32,6 +32,7 @@
     <Compile Include="app\admin.py" />
     <Compile Include="app\apps.py" />
     <Compile Include="app\controllers\album_controller.py" />
+    <Compile Include="app\controllers\bandMember_controller.py" />
     <Compile Include="app\controllers\band_controller.py" />
     <Compile Include="app\controllers\genre_controller.py" />
     <Compile Include="app\controllers\product_controller.py" />

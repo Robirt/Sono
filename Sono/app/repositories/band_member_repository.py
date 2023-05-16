@@ -5,14 +5,14 @@ class BandMemberRepository():
     def get_band_member() -> QuerySet[dict]:
         return BandMember.object.all().values()
 
-    def get_band_member_by_id(id: int) -> BandMember:
+    def get_band_member_by_id(self, id: int) -> BandMember:
         return BandMember.objects.get(id=id)
 
-    def add_band_member(band_member: BandMember) -> None:
+    def add_band_member(self, band_member: BandMember) -> None:
         band_member.save()
 
-    def update_band_member(band_member: BandMember) -> None:
+    def update_band_member(self, band_member: BandMember) -> None:
         band_member.save()
 
-    def delete_band_member(id: int) -> None:
-        BandMember.delete(BandMember.objects.get(id=id))
+    def delete_band_member(self, band_member : BandMember) -> None:
+        BandMember.delete(band_member)

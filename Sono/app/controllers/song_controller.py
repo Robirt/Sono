@@ -11,24 +11,20 @@ def songs(request):
     form = SongForm()
 
     if request.method == 'POST':
-        if 'Update' in request.POST:
-            song_id = request.POST.get('song_id')
-            song = Song.objects.get(id=song_id)
-            form = SongForm(request.POST, instance=song)
-            if form.is_valid():
-                form.save()
-                return redirect('songs')
-
-        elif 'Remove' in request.POST:
-            song_id = request.POST.get('song_id')
-            song = Song.objects.get(id=song_id)
-            song.delete()
-            return redirect('songs')
-
-        elif 'Add' in request.POST:
+        if 'add' in request.POST:
             form = SongForm(request.POST)
             if form.is_valid():
-                form.save()
+                song_service.add_song(form.save(commit=False))
                 return redirect('songs')
+
+        if 'update' in request.POST:
+            form = SongForm(request.POST, instance = song_service.get_song_by_id(request.POST['id']))
+            if form.is_valid():
+                song_service.update_song(form.save(commit=False))
+                return redirect('songs')
+
+        elif 'delete' in request.POST:
+            song_service.delete_song(request.POST['id'])
+            return redirect('songs')
 
     return render(request, 'app/songs/songs.html', {'songs': songs, 'form': form})

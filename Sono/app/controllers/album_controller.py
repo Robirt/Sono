@@ -11,25 +11,21 @@ def albums(request):
     form = AlbumForm()
 
     if request.method == 'POST':
-        if 'Update' in request.POST:
-            album_id = request.POST.get('album_id')
-            album = Album.objects.get(id=album_id)
-            form = AlbumForm(request.POST, instance=album)
-            if form.is_valid():
-                form.save()
-                return redirect('albums')
-
-        elif 'Remove' in request.POST:
-            album_id = request.POST.get('album_id')
-            album = Album.objects.get(id=album_id)
-            album.delete()
-            return redirect('albums')
-
-        elif 'add_album' in request.POST:
+        if 'add' in request.POST:
             form = AlbumForm(request.POST)
             if form.is_valid():
-                form.save()
+                album_service.add_album(form.save(commit=False))
                 return redirect('albums')
+
+        if 'update' in request.POST:
+            form = AlbumForm(request.POST, instance = album_service.get_album_by_id(request.POST['id']))
+            if form.is_valid():
+                album_service.update_album(form.save(commit=False))
+                return redirect('albums')
+
+        elif 'delete' in request.POST:
+            album_service.delete_album(request.POST['id'])
+            return redirect('albums')
 
     return render(request, 'app/albums/albums.html', {'albums': albums, 'form': form})
 

@@ -11,24 +11,20 @@ def bands(request):
     form = BandForm()
 
     if request.method == 'POST':
-        if 'update' in request.POST:
-            band_id = request.POST.get('id')
-            band = Band.objects.get(id=band_id)
-            form = BandForm(request.POST, request.FILES, instance=band)
+        if 'add' in request.POST:
+            form = BandForm(request.POST)
             if form.is_valid():
-                form.save()
+                band_service.add_band(form.save(commit=False))
+                return redirect('bands')
+
+        if 'update' in request.POST:
+            form = BandForm(request.POST, instance = band_service.get_band_by_id(request.POST['id']))
+            if form.is_valid():
+                band_service.update_band(form.save(commit=False))
                 return redirect('bands')
 
         elif 'delete' in request.POST:
-            band_id = request.POST.get('id')
-            band = Band.objects.get(id=band_id)
-            band.delete()
+            band_service.delete_band(request.POST['id'])
             return redirect('bands')
-
-        elif 'add' in request.POST:
-            form = BandForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return redirect('bands')
 
     return render(request, 'app/bands/bands.html', {'bands': bands, 'form': form})
