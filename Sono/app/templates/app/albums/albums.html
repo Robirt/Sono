@@ -1,0 +1,103 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/panel.css' %}" />
+    {% endblock %}
+
+<section>
+    <aside>
+        <table id="albums-table">
+            <caption>Albums</caption>
+            <thead>
+                <tr><th>Id</th><th>Title</th><th>Band</th><th>Cover</th></tr>
+            </thead>
+            <tbody>
+                {% for album in albums %}
+                <tr data-id="{{ album.id }}"><td>{{ album.id }}</td><td>{{ album.title }}<td>{{ album.band.name }}</td><td><img src="{{ album.cover.url }}" alt="Album Cover"></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
+</section>
+<section>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="idInput" name="id" value="{{ album.id.value }}" readonly>
+        </div>
+
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="titleInput" name="title" value="{{ form.title.value }}">
+        </div>
+
+        <div>
+            <label for="band">Band</label>
+            <select id="bandInput" name="band">
+                {% for band in bands %}
+                <option value="{{ band.id }}">{{ band.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="cover">Cover</label>
+            <input type="file" id="coverInput" name="cover">
+        </div>
+
+        <div>
+            <img src="{{ form.cover.url }}" id="cover" alt="Album Cover" />
+        </div>
+
+        <div>
+            <button type="submit" name="add">Add</button>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="delete">Delete</button>
+        </div>
+    </form>
+</section>
+<script>
+    var albumsTable = document.querySelector('#albums-table');
+    var idInput = document.querySelector('#idInput');
+    var titleInput = document.querySelector('#titleInput');
+    var bandInput = document.querySelector('#bandInput');
+    var coverInput = document.querySelector("#coverInput");
+    var cover = document.querySelector('#cover')
+
+    var selectedRow = null;
+
+    albumsTable.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        if (row && row.dataset.id) {
+
+            if (selectedRow) selectedRow.classList.remove('selected-row');
+
+            selectedRow = row;
+
+            idInput.value = selectedRow.cells[0].textContent;
+            titleInput.value = selectedRow.cells[1].textContent;
+            document.querySelectorAll('#bandInput option').forEach(function (option) { if (option.text === selectedRow.cells[2].textContent) option.selected = true; });
+            coverInput.src = selectedRow.cells[3].querySelector('img').src;
+            cover.setAttribute('src', selectedRow.cells[3].querySelector('img').getAttribute('src'));
+
+            row.classList.add('selected-row');
+        }
+    });
+
+    document.querySelector('#coverInput').addEventListener('change', handleImageSelect);
+
+    function handleImageSelect(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector('#cover').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+{% endblock %}

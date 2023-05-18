@@ -31,6 +31,14 @@
   <ItemGroup>
     <Compile Include="app\admin.py" />
     <Compile Include="app\apps.py" />
+    <Compile Include="app\controllers\album_controller.py" />
+    <Compile Include="app\controllers\band_member_controller.py" />
+    <Compile Include="app\controllers\band_controller.py" />
+    <Compile Include="app\controllers\genre_controller.py" />
+    <Compile Include="app\controllers\product_controller.py" />
+    <Compile Include="app\controllers\rental_controller.py" />
+    <Compile Include="app\controllers\song_controller.py" />
+    <Compile Include="app\forms.py" />
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\repositories\album_repository.py">
@@ -55,7 +63,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="app\services\album_service.py" />
+    <Compile Include="app\services\band_member_service.py" />
     <Compile Include="app\services\band_service.py" />
+    <Compile Include="app\services\song_service.py" />
     <Compile Include="app\services\genre_service.py" />
     <Compile Include="app\services\product_service.py" />
     <Compile Include="app\services\rental_service.py" />
@@ -70,6 +80,7 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\migrations\" />
+    <Folder Include="app\controllers\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\photo\" />
@@ -82,6 +93,12 @@
     <Folder Include="app\repositories\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="app\templates\app\genres\" />
+    <Folder Include="app\templates\app\albums\" />
+    <Folder Include="app\templates\app\bands\" />
+    <Folder Include="app\templates\app\band_members\" />
+    <Folder Include="app\templates\app\products\" />
+    <Folder Include="app\templates\app\rentals\" />
     <Folder Include="app\templates\app\songs\" />
     <Folder Include="Sono\" />
   </ItemGroup>
@@ -93,6 +110,7 @@
     <Content Include="app\static\app\styles\contact.css" />
     <Content Include="app\static\app\styles\layout.css" />
     <Content Include="app\static\app\styles\navmenu.css" />
+    <Content Include="app\static\app\styles\panel.css" />
     <Content Include="app\static\app\styles\signin.css" />
     <Content Include="app\static\app\styles\signup.css" />
     <Content Include="app\static\app\styles\songs\songslist.css" />
@@ -108,13 +126,20 @@
     <Content Include="app\static\fonts\font\fontello.woff" />
     <Content Include="app\static\fonts\font\fontello.woff2" />
     <Content Include="app\templates\app\about.html" />
+    <Content Include="app\templates\app\albums\albums.html" />
+    <Content Include="app\templates\app\band_members\band_members.html" />
+    <Content Include="app\templates\app\bands\bands.html" />
     <Content Include="app\templates\app\contact.html" />
+    <Content Include="app\templates\app\genres\genres.html" />
     <Content Include="app\templates\app\home.html" />
     <Content Include="app\templates\app\catalog.html" />
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\navmenu.html" />
+    <Content Include="app\templates\app\products\products.html" />
+    <Content Include="app\templates\app\rentals\rentals.html" />
     <Content Include="app\templates\app\signin.html" />
     <Content Include="app\templates\app\signup.html" />
+    <Content Include="app\templates\app\songs\songs.html" />
     <Content Include="app\templates\app\songs\songslist.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />

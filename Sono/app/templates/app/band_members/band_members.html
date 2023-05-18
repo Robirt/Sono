@@ -1,0 +1,93 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/panel.css' %}" />
+    {% endblock %}
+
+<section>
+    <aside>
+        <table id="band-members-table">
+            <caption>Band members</caption>
+            <thead>
+                <tr><th>Id</th><th>First name</th><th>Last name</th><th>Role</th><th>Band</th></tr>
+            </thead>
+            <tbody>
+                {% for band_member in band_members %}
+                <tr data-id="{{ band_member.id }}"><td>{{ band_member.id }}</td><td>{{ band_member.first_name }}</td><td>{{ band_member.last_name }}</td><td>{{ band_member.role }}</td><td>{{ band_member.band.name }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
+</section>
+<section>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="idInput" name="id" value="{{ band_member.id.value }}" readonly>
+        </div>
+
+        <div>
+            <label for="firstName">First name</label>
+            <input type="text" id="firstNameInput" name="first_name" value="{{ form.first_name.value }}">
+        </div>
+
+        <div>
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastNameInput" name="last_name" value="{{ form.last_name.value }}">
+        </div>
+
+        <div>
+            <label for="role">Role</label>
+            <input type="text" id="roleInput" name="role" value="{{ form.role.value }}">
+        </div>
+
+        <div>
+            <label for="band">Band</label>
+            <select id="bandInput" name="band">
+                {% for band in bands %}
+                <option value="{{ band.id }}">{{ band.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" name="add">Add</button>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="delete">Delete</button>
+        </div>
+    </form>
+</section>
+<script>
+    var bandMembersTable = document.querySelector('#band-members-table');
+    var idInput = document.querySelector('#idInput');
+    var firstNameInput = document.querySelector('#firstNameInput');
+    var lastNameInput = document.querySelector('#lastNameInput');
+    var roleInput = document.querySelector('#roleInput');
+    var bandInput = document.querySelector('#bandInput');
+
+    var selectedRow = null;
+
+    bandMembersTable.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        if (row && row.dataset.id) {
+
+            if (selectedRow) selectedRow.classList.remove('selected-row');
+
+            selectedRow = row;
+
+            idInput.value = selectedRow.cells[0].textContent;
+            firstNameInput.value = selectedRow.cells[1].textContent;
+            lastNameInput.value = selectedRow.cells[2].textContent;
+            roleInput.value = selectedRow.cells[3].textContent;
+            document.querySelectorAll('#bandInput option').forEach(function (option) { if (option.text === selectedRow.cells[4].textContent) option.selected = true; });
+
+            row.classList.add('selected-row');
+        }
+    });
+</script>
+{% endblock %}

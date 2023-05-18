@@ -1,0 +1,88 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/panel.css' %}" />
+    {% endblock %}
+
+<section>
+    <aside>
+        <table id="rentals-table">
+            <caption>Rentals</caption>
+            <thead>
+                <tr><th>Id</th><th>Reservation date</th><th>Reservation expire date</th><th>Return date</th><th>Renter</th></tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr data-id="{{ rental.id }}"><td>{{ rental.id }}</td><td>{{ rental.reservation_date }}</td><td>{{ rental.reservation_expire_date }}</td><td>{{ rental.return_date }}</td><td>{{ rental.renter.first_name }} {{ rental.renter.last_name }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
+</section>
+<section>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="idInput" name="id" value="{{ rental.id.value }}" readonly>
+        </div>
+
+        <div>
+            <label for="reservation_date">Reservation date</label>
+            <input type="text" id="reservationDateInput" name="reservation_date" value="{{ form.reservation_date.value }}">
+        </div>
+
+        <div>
+            <label for="reservation_expire_date">Reservation expire date</label>
+            <input type="text" id="reservationExpireDateInput" name="reservation_expire_date" value="{{ form.reservation_expire_date.value }}">
+        </div>
+
+        <div>
+            <label for="return_date">Return date</label>
+            <input type="text" id="returnDateInput" name="return_date" value="{{ form.return_date.value }}">
+        </div>
+
+        <div>
+            <label for="renter">Renter</label>
+            <input type="text" id="renterInput" name="renter" value="{{ form.renter.value }}" readonly>
+        </div>
+
+        <div>
+            <button type="submit" name="delete">Delete</button>
+        </div>
+    </form>
+</section>
+
+<script>
+    var rentalsTable = document.querySelector('#rentals-table');
+    var idInput = document.querySelector('#idInput');
+    var reservationDateInput = document.querySelector('#reservationDateInput');
+    var reservationExpireDateInput = document.querySelector('#reservationExpireDateInput');
+    var returnDateInput = document.querySelector('#returnDateInput');
+    var renterInput = document.querySelector('#renterInput');
+
+    var selectedRow = null;
+
+    rentalsTable.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        if (row && row.dataset.id) {
+
+            if (selectedRow) selectedRow.classList.remove('selected-row');
+
+            selectedRow = row;
+
+            idInput.value = selectedRow.cells[0].textContent;
+            reservationDateInput.value = selectedRow.cells[1].textContent;
+            reservationExpireDateInput.value = selectedRow.cells[2].textContent;
+            returnDateInput.value = selectedRow.cells[3].textContent;
+            renterInput.value = selectedRow.cells[4].textContent;
+            
+            row.classList.add('selected-row');
+        }
+    });
+</script>
+{% endblock %}

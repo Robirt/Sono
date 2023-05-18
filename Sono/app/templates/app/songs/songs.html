@@ -1,0 +1,79 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'app/styles/panel.css' %}" />
+    {% endblock %}
+
+<section>
+    <aside>
+        <table id="songs-table">
+            <caption>Songs</caption>
+            <thead>
+                <tr><th>Id</th><th>Title</th><th>Album</th></tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                <tr data-id="{{ song.id }}"><td>{{ song.id }}</td><td>{{ song.title }}</td><td>{{ song.album.title }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
+</section>
+<section>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="idInput" name="id" value="{{ songs.id.value }}" readonly>
+        </div>
+
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="titleInput" name="title" value="{{ form.title.value }}">
+        </div>
+
+        <div>
+            <label for="album">Album</label>
+            <select id="albumInput" name="album">
+                {% for album in albums %}
+                <option value="{{ album.id }}">{{ album.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" name="add">Add</button>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="delete">Delete</button>
+        </div>
+    </form>
+</section>
+<script>
+    var songsTable = document.querySelector('#songs-table');
+    var idInput = document.querySelector('#idInput');
+    var titleInput = document.querySelector('#titleInput');
+    var albumInput = document.querySelector("#albumInput");
+
+    var selectedRow = null;
+
+    songsTable.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        if (row && row.dataset.id) {
+
+            if (selectedRow) selectedRow.classList.remove('selected-row');
+
+            selectedRow = row;
+
+            idInput.value = selectedRow.cells[0].textContent;
+            titleInput.value = selectedRow.cells[1].textContent;
+            document.querySelectorAll('#albumInput option').forEach(function (option) { if (option.text === selectedRow.cells[2].textContent) option.selected = true; });
+
+            row.classList.add('selected-row');
+        }
+    });
+</script>
+{% endblock %}
