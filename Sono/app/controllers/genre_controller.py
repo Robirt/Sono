@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
 from ..services.genre_service import GenreService
 from ..forms import GenreForm
-from ..models import Genre
 
 genre_service: GenreService = GenreService()
 

@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from ..models import Album
 
 class AlbumRepository():
-    def get_albums():
+    def get_albums(self) -> QuerySet[Album]:
         return list(Album.objects.all().prefetch_related('band'))
 
     def get_album_by_id(self, id: int) -> Album:

@@ -8,17 +8,19 @@
     {% endblock %}
 
 <section>
-    <table id="songs-table">
-        <caption>Songs</caption>
-        <thead>
-            <tr><th>Tytul</th><th>Album</th></tr>
-        </thead>
-        <tbody>
-            {% for song in songs %}
-            <tr data-id="{{ songs.id }}"><td>{{ song.title }}</td><td>{{ song.album}}</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <aside>
+        <table id="songs-table">
+            <caption>Songs</caption>
+            <thead>
+                <tr><th>Id</th><th>Title</th><th>Album</th></tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                <tr data-id="{{ song.id }}"><td>{{ song.id }}</td><td>{{ song.title }}</td><td>{{ song.album.title }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
 </section>
 <section>
     <form method="post" enctype="multipart/form-data">
@@ -36,7 +38,11 @@
 
         <div>
             <label for="album">Album</label>
-            <input type="text" id="albumInput" name="album" value="{{ form.album.value }}">
+            <select id="albumInput" name="album">
+                {% for album in albums %}
+                <option value="{{ album.id }}">{{ album.title }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <div>
@@ -52,7 +58,6 @@
     var titleInput = document.querySelector('#titleInput');
     var albumInput = document.querySelector("#albumInput");
 
-
     var selectedRow = null;
 
     songsTable.addEventListener('click', (event) => {
@@ -65,11 +70,10 @@
 
             idInput.value = selectedRow.cells[0].textContent;
             titleInput.value = selectedRow.cells[1].textContent;
-            albumInput.value = selectedRow.cells[2].textContent;
+            document.querySelectorAll('#albumInput option').forEach(function (option) { if (option.text === selectedRow.cells[2].textContent) option.selected = true; });
 
             row.classList.add('selected-row');
         }
     });
-
 </script>
 {% endblock %}

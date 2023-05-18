@@ -2,8 +2,8 @@ from django.db.models.query import QuerySet
 from ..models import Product
 
 class ProductRepository():
-    def get_products() -> QuerySet[dict]:
-        return Product.object.all().values()
+    def get_products(self) -> QuerySet[dict]:
+        return Product.objects.all().values()
 
     def get_product_by_id(self, id: int) -> Product:
         return Product.objects.get(id=id)

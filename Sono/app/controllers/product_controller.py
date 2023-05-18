@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
 from ..services.product_service import ProductService
+from ..services.album_service import AlbumService
 from ..forms import ProductForm
-from ..models import Product
 
 product_service: ProductService = ProductService()
+album_service: AlbumService = AlbumService()
 
 def products(request):
-    products = Product.objects.all()
+    products = product_service.get_products()
+
     form = ProductForm()
 
     if request.method == 'POST':
@@ -27,4 +28,4 @@ def products(request):
             product_service.delete_product(request.POST['id'])
             return redirect('products')
 
-    return render(request, 'app/products/products.html', {'products': products, 'form': form})
+    return render(request, 'app/products/products.html', {'products': products, 'form': form, 'albums': album_service.get_albums()})

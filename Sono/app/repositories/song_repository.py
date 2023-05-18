@@ -2,8 +2,8 @@ from django.db.models.query import QuerySet
 from ..models import Song
 
 class SongRepository():
-    def get_songs() -> QuerySet[dict]:
-        return Song.object.all().values()
+    def get_songs(self) -> QuerySet[dict]:
+        return Song.objects.all()
 
     def get_song_by_id(self, id: int) -> Song:
         return Song.objects.get(id=id)

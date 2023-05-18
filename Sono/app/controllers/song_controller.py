@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
 from ..services.song_service import SongService
+from ..services.album_service import AlbumService
 from ..forms import SongForm
-from ..models import Song
 
 song_service: SongService = SongService()
+album_service: AlbumService = AlbumService()
 
 def songs(request):
-    songs = Song.objects.all()
+    songs = song_service.get_songs();
+
     form = SongForm()
 
     if request.method == 'POST':
@@ -27,4 +28,4 @@ def songs(request):
             song_service.delete_song(request.POST['id'])
             return redirect('songs')
 
-    return render(request, 'app/songs/songs.html', {'songs': songs, 'form': form})
+    return render(request, 'app/songs/songs.html', {'songs': songs, 'form': form, 'albums': album_service.get_albums()})

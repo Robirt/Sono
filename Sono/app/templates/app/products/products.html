@@ -8,17 +8,19 @@
     {% endblock %}
 
 <section>
-    <table id="products-table">
-        <caption>Products</caption>
-        <thead>
-            <tr><th>Id</th><th>Album</th><th>Code</th><th>Rental</th></tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr data-id="{{product.id}}"><td>{{ product.album }}</td><td>{{ product.code }}</td><td>{{ product.rental }}</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <aside>
+        <table id="products-table">
+            <caption>Products</caption>
+            <thead>
+                <tr><th>Id</th><th>Album</th><th>Code</th><th>Rental</th></tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr data-id="{{ product.id }}"><td>{{ product.id }}</td><td>{{ product.album.title }}</td><td>{{ product.code }}</td><td>{{ product.rental.id }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
 </section>
 <section>
     <form method="post" enctype="multipart/form-data">
@@ -31,17 +33,21 @@
 
         <div>
             <label for="album">Album</label>
-            <input type="text" id="albumInput" name="album" value="{{ form.album.value }}">
+            <select id="albumInput" name="album">
+                {% for album in albums %}
+                <option value="{{ album.id }}">{{ album.title }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <div>
             <label for="code">Code</label>
-            <input type="file" id="codeInput" name="code" value="{{ form.code.value }}">
+            <input type="text" id="codeInput" name="code" value="{{ form.code.value }}">
         </div>
 
         <div>
-            <label for="rental">Code</label>
-            <input type="file" id="rentalInput" name="rental" value="{{ form.rental.value }}">
+            <label for="rental">Rental</label>
+            <input type="text" id="rentalInput" name="rental" value="{{ form.rental.id }}" readonly>
         </div>
 
         <div>
@@ -50,8 +56,8 @@
             <button type="submit" name="delete">Delete</button>
         </div>
     </form>
-    </section>
-    <script>
+</section>
+<script>
     var productsTable = document.querySelector('#products-table');
     var idInput = document.querySelector('#idInput');
     var albumInput = document.querySelector('#albumInput');
@@ -60,7 +66,7 @@
 
     var selectedRow = null;
 
-    bandsTable.addEventListener('click', (event) => {
+    productsTable.addEventListener('click', (event) => {
         const row = event.target.closest('tr');
         if (row && row.dataset.id) {
 
@@ -76,7 +82,5 @@
             row.classList.add('selected-row');
         }
     });
-
-
-    </script>
-    {% endblock %}
+</script>
+{% endblock %}

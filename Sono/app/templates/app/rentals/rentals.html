@@ -8,49 +8,50 @@
     {% endblock %}
 
 <section>
-    <table id="rentals-table">
-        <caption>Rentals</caption>
-        <thead>
-            <tr><th>Id</th><th>Reservation date</th><th>Reservation expire date</th><th>Return date</th><th>Reter</th></tr>
-        </thead>
-        <tbody>
-            {% for rental in rentals %}
-            <tr data-id="{{ rental.id }}"><td>{{ rental.reservation_date }}</td><td>{{ rental.reservation_expire_date }}</td><td>{{ rental.return_date }}</td><td>{{ rental.renter }}</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <aside>
+        <table id="rentals-table">
+            <caption>Rentals</caption>
+            <thead>
+                <tr><th>Id</th><th>Reservation date</th><th>Reservation expire date</th><th>Return date</th><th>Renter</th></tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr data-id="{{ rental.id }}"><td>{{ rental.id }}</td><td>{{ rental.reservation_date }}</td><td>{{ rental.reservation_expire_date }}</td><td>{{ rental.return_date }}</td><td>{{ rental.renter.first_name }} {{ rental.renter.last_name }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
 </section>
 <section>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
         <div>
             <label for="id">Id</label>
-            <input type="text" id="idInput" name="id" value="{{ band.id.value }}" readonly>
+            <input type="text" id="idInput" name="id" value="{{ rental.id.value }}" readonly>
         </div>
 
         <div>
             <label for="reservation_date">Reservation date</label>
-            <input type="text" id="reservation_dateInput" name="reservation_date" value="{{ form.reservation_date.value }}">
+            <input type="text" id="reservationDateInput" name="reservation_date" value="{{ form.reservation_date.value }}">
         </div>
 
         <div>
             <label for="reservation_expire_date">Reservation expire date</label>
-            <input type="text" id="reservation_expire_dateInput" name="reservation_expire_date" value="{{ form.reservation_expire_date.value }}">
+            <input type="text" id="reservationExpireDateInput" name="reservation_expire_date" value="{{ form.reservation_expire_date.value }}">
         </div>
 
         <div>
-            <label for="return_date">Reservation expire date</label>
-            <input type="text" id="return_dateInput" name="return_date" value="{{ form.return_date.value }}">
+            <label for="return_date">Return date</label>
+            <input type="text" id="returnDateInput" name="return_date" value="{{ form.return_date.value }}">
         </div>
 
         <div>
-            <label for="renter">Reservation expire date</label>
-            <input type="text" id="renterInput" name="renter" value="{{ form.renter.value }}">
+            <label for="renter">Renter</label>
+            <input type="text" id="renterInput" name="renter" value="{{ form.renter.value }}" readonly>
         </div>
 
         <div>
-            <button type="submit" name="add">Add</button>
-            <button type="submit" name="update">Update</button>
             <button type="submit" name="delete">Delete</button>
         </div>
     </form>
@@ -59,9 +60,9 @@
 <script>
     var rentalsTable = document.querySelector('#rentals-table');
     var idInput = document.querySelector('#idInput');
-    var reservation_dateInput = document.querySelector('#reservation_dateInput');
-    var reservation_expire_dateInput = document.querySelector('#reservation_expire_dateInput');
-    var return_dateInput = document.querySelector('#return_dateInput');
+    var reservationDateInput = document.querySelector('#reservationDateInput');
+    var reservationExpireDateInput = document.querySelector('#reservationExpireDateInput');
+    var returnDateInput = document.querySelector('#returnDateInput');
     var renterInput = document.querySelector('#renterInput');
 
     var selectedRow = null;
@@ -75,15 +76,13 @@
             selectedRow = row;
 
             idInput.value = selectedRow.cells[0].textContent;
-            reservation_dateInput.value = selectedRow.cells[1].textContent;
-            reservation_expire_date.value = selectedRow.cells[2].textContent;
-            return_dateInput.value = selectedRow.cells[3].textContent;
+            reservationDateInput.value = selectedRow.cells[1].textContent;
+            reservationExpireDateInput.value = selectedRow.cells[2].textContent;
+            returnDateInput.value = selectedRow.cells[3].textContent;
             renterInput.value = selectedRow.cells[4].textContent;
             
-
             row.classList.add('selected-row');
         }
     });
-
 </script>
 {% endblock %}

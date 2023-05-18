@@ -2,8 +2,8 @@ from django.db.models.query import QuerySet
 from ..models import Rental
 
 class RentalRepository():
-    def get_rentals() -> QuerySet[dict]:
-        return Rental.object.all().values()
+    def get_rentals(self) -> QuerySet[Rental]:
+        return Rental.objects.all().prefetch_related('album').prefetch_related('rental')
 
     def get_rental_by_id(self, id: int) -> Rental:
         return Rental.objects.get(id=id)

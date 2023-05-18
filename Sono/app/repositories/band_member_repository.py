@@ -2,8 +2,8 @@ from django.db.models.query import QuerySet
 from ..models import BandMember
 
 class BandMemberRepository():
-    def get_band_member() -> QuerySet[dict]:
-        return BandMember.object.all().values()
+    def get_band_members(self) -> QuerySet[BandMember]:
+        return BandMember.objects.all().prefetch_related('band')
 
     def get_band_member_by_id(self, id: int) -> BandMember:
         return BandMember.objects.get(id=id)

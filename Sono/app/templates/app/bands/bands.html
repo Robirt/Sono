@@ -8,17 +8,19 @@
     {% endblock %}
 
 <section>
-    <table id="bands-table">
-        <caption>Bands</caption>
-        <thead>
-            <tr><th>Id</th><th>Name</th><th>Image</th></tr>
-        </thead>
-        <tbody>
-            {% for band in bands %}
-            <tr data-id="{{ band.id }}"><td>{{ band.id }}</td><td>{{ band.name }}</td><td><img src="{{ band.image.url }}" alt="Band Image"></td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <aside>
+        <table id="bands-table">
+            <caption>Bands</caption>
+            <thead>
+                <tr><th>Id</th><th>Name</th><th>Image</th></tr>
+            </thead>
+            <tbody>
+                {% for band in bands %}
+                <tr data-id="{{ band.id }}"><td>{{ band.id }}</td><td>{{ band.name }}</td><td><img src="{{ band.image.url }}" alt="Band Image"></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
 </section>
 <section>
     <form method="post" enctype="multipart/form-data">

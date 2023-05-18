@@ -6,7 +6,7 @@ class RentalService():
     def __init__(self) -> None:
         self.rental_repository = RentalRepository()
 
-    def get_rentals(self) -> QuerySet[dict]:
+    def get_rentals(self) -> QuerySet[Rental]:
         return self.rental_repository.get_rentals()
 
     def get_rental_by_id(self, id: int) -> Rental:

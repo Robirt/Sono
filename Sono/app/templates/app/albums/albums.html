@@ -8,17 +8,19 @@
     {% endblock %}
 
 <section>
-    <table id="albums-table">
-        <caption>Albums</caption>
-        <thead>
-            <tr><th>Id</th><th>Title</th><th>Band</th><th>Cover</th></tr>
-        </thead>
-        <tbody>
-            {% for album in albums %}
-            <tr data-id="{{album.id}}"><td>{{ album.title }}"><td>{{ album.band.name }}</td><td><img src="{{ album.cover }}" alt="Album Image"></td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <aside>
+        <table id="albums-table">
+            <caption>Albums</caption>
+            <thead>
+                <tr><th>Id</th><th>Title</th><th>Band</th><th>Cover</th></tr>
+            </thead>
+            <tbody>
+                {% for album in albums %}
+                <tr data-id="{{ album.id }}"><td>{{ album.id }}</td><td>{{ album.title }}<td>{{ album.band.name }}</td><td><img src="{{ album.cover.url }}" alt="Album Cover"></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </aside>
 </section>
 <section>
     <form method="post" enctype="multipart/form-data">
@@ -36,7 +38,11 @@
 
         <div>
             <label for="band">Band</label>
-            <input type="text" id="bandInput" name="band" value="{{ form.band.value }}">
+            <select id="bandInput" name="band">
+                {% for band in bands %}
+                <option value="{{ band.id }}">{{ band.name }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <div>
@@ -75,9 +81,9 @@
 
             idInput.value = selectedRow.cells[0].textContent;
             titleInput.value = selectedRow.cells[1].textContent;
-            bandInput.value = selectedRow.cells[2].textContent;
-            cover.setAttribute('src', selectedRow.cells[3].querySelector('img').getAttribute('src'));
+            document.querySelectorAll('#bandInput option').forEach(function (option) { if (option.text === selectedRow.cells[2].textContent) option.selected = true; });
             coverInput.src = selectedRow.cells[3].querySelector('img').src;
+            cover.setAttribute('src', selectedRow.cells[3].querySelector('img').getAttribute('src'));
 
             row.classList.add('selected-row');
         }
