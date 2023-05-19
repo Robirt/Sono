@@ -26,5 +26,5 @@ def genres(request):
             genre_service.delete_genre(request.POST['id'])
             return redirect('genres')
 
-    return render(request, 'app/genres/genres.html', {'genres': genres, 'form': form})
+    return render(request, 'app/genres/genres.html', {'genres': genres, 'form': form, 'group': request.user.groups.first().name if request.user.groups.first() else None})
 

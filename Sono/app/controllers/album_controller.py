@@ -28,5 +28,5 @@ def albums(request):
             album_service.delete_album(request.POST['id'])
             return redirect('albums')
 
-    return render(request, 'app/albums/albums.html', {'albums': albums, 'form': form, 'bands': band_service.get_bands()})
+    return render(request, 'app/albums/albums.html', {'albums': albums, 'form': form, 'bands': band_service.get_bands(), 'group': request.user.groups.first().name if request.user.groups.first() else None})
 

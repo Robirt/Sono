@@ -28,4 +28,4 @@ def songs(request):
             song_service.delete_song(request.POST['id'])
             return redirect('songs')
 
-    return render(request, 'app/songs/songs.html', {'songs': songs, 'form': form, 'albums': album_service.get_albums()})
+    return render(request, 'app/songs/songs.html', {'songs': songs, 'form': form, 'albums': album_service.get_albums(), 'group': request.user.groups.first().name if request.user.groups.first() else None})

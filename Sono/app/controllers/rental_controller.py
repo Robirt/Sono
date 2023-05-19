@@ -14,4 +14,4 @@ def rentals(request):
             rental_service.delete_rental(request.POST['id'])
             return redirect('rentals')
 
-    return render(request, 'app/rentals/rentals.html', {'rentals': rentals, 'form': form})
+    return render(request, 'app/rentals/rentals.html', {'rentals': rentals, 'form': form, 'group': request.user.groups.first().name if request.user.groups.first() else None})

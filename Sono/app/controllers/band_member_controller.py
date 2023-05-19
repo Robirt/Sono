@@ -28,4 +28,4 @@ def band_members(request):
             band_member_service.delete_band_member(request.POST['id'])
             return redirect('band_members')
 
-    return render(request, 'app/band_members/band_members.html', {'band_members': band_members, 'form': form, 'bands': bands_service.get_bands()})
+    return render(request, 'app/band_members/band_members.html', {'band_members': band_members, 'form': form, 'bands': bands_service.get_bands(), 'group': request.user.groups.first().name if request.user.groups.first() else None})
