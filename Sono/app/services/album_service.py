@@ -6,14 +6,14 @@ class AlbumService():
     def __init__(self) -> None:
         self.album_repository = AlbumRepository()
 
-    def get_albums(self) -> QuerySet[dict]:
+    def get_albums(self) -> QuerySet[Album]:
         return self.album_repository.get_albums()
 
     def get_album_by_id(self, id: int) -> Album:
         return self.album_repository.get_album_by_id(id)
 
-    def get_album_by_name(self, name: str) -> Album:
-        return self.get_albums().filter(name=name)
+    def get_album_by_title(self, title: str) -> Album:
+        return self.get_albums().filter(title=title).first()
 
     def add_album(self, album: Album) -> None:
         self.album_repository.add_album(album)

@@ -105,6 +105,8 @@
   <ItemGroup>
     <Content Include="app\static\app\photo\we.jpg" />
     <Content Include="app\static\app\photo\we1.png" />
+    <Content Include="app\static\app\styles\album.css" />
+    <Content Include="app\static\app\styles\history.css" />
     <Content Include="app\static\app\styles\home.css" />
     <Content Include="app\static\app\styles\about.css" />
     <Content Include="app\static\app\styles\catalog.css" />
@@ -127,6 +129,7 @@
     <Content Include="app\static\fonts\font\fontello.woff" />
     <Content Include="app\static\fonts\font\fontello.woff2" />
     <Content Include="app\templates\app\about.html" />
+    <Content Include="app\templates\app\albums\album.html" />
     <Content Include="app\templates\app\albums\albums.html" />
     <Content Include="app\templates\app\band_members\band_members.html" />
     <Content Include="app\templates\app\bands\bands.html" />
@@ -137,6 +140,7 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\navmenu.html" />
     <Content Include="app\templates\app\products\products.html" />
+    <Content Include="app\templates\app\rentals\history.html" />
     <Content Include="app\templates\app\rentals\rentals.html" />
     <Content Include="app\templates\app\sign_in.html" />
     <Content Include="app\templates\app\sign_up.html" />

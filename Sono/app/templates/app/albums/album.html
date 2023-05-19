@@ -1,0 +1,42 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/album.css' %}" />
+    {% endblock %}
+
+<section>
+    <section>
+        <div>
+            <h3>Album</h3>
+            <img src="{{ album.cover.url }}" alt="Album cover" />
+            <h3>{{ album.title }}</h3>
+        </div>
+
+        <div>
+            <h4>Band</h4>
+            <img src="{{ album.band.image.url }}" alt="Album cover" />
+            <h4>{{ album.band.name }}</h4>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h3>Songs</h3>
+            <ol>
+                {% for song in songs %}
+                <li>{{ song.title }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div>
+            <h5>Available products: {{ products.count }}</h5>
+            {% if products.count > 0 %}
+            <a href="{% url 'rent' album.id %}">Rent</a>
+            {% endif %}
+        </div>
+    </section>
+</section>
+{% endblock %}

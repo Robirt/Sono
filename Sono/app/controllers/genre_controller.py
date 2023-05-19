@@ -5,6 +5,9 @@ from ..forms import GenreForm
 genre_service: GenreService = GenreService()
 
 def genres(request):
+    if request.user.groups.first().name == 'Users':
+        return redirect('home')
+
     genres = genre_service.get_genres()
 
     form = GenreForm()

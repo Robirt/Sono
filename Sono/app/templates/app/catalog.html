@@ -8,16 +8,18 @@
     {% endblock %}
 
 <section>
-    {% for album in albums %}
-    <figure>
-        <a>
-            <img src="{{ album.cover.url }}" alt="Album cover">
-            <figcaption>
-                <h4>{{ album.title }}</h4>
-                <h5>{{ album.band.name }}</h5>
-            </figcaption>
-        </a>
-    </figure>
-    {% endfor %}
+    <section>
+        {% for album in albums %}
+        <figure>
+            <a href="{% url 'album' album.title %}">
+                <img src="{{ album.cover.url }}" alt="Album cover">
+                <figcaption>
+                    <h4>{{ album.title }}</h4>
+                    <h5>{{ album.band.name }}</h5>
+                </figcaption>
+            </a>
+        </figure>
+        {% endfor %}
+    </section>
 </section>
 {% endblock %} 

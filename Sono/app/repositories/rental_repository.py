@@ -3,7 +3,7 @@ from ..models import Rental
 
 class RentalRepository():
     def get_rentals(self) -> QuerySet[Rental]:
-        return Rental.objects.all().prefetch_related('album').prefetch_related('rental')
+        return Rental.objects.all()
 
     def get_rental_by_id(self, id: int) -> Rental:
         return Rental.objects.get(id=id)
