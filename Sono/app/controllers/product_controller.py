@@ -28,4 +28,4 @@ def products(request):
             product_service.delete_product(request.POST['id'])
             return redirect('products')
 
-    return render(request, 'app/products/products.html', {'products': products, 'form': form, 'albums': album_service.get_albums()})
+    return render(request, 'app/products/products.html', {'products': products, 'form': form, 'albums': album_service.get_albums(), 'group': request.user.groups.first().name if request.user.groups.first() else None})

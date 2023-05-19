@@ -1,37 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 section {
     display: flex;
+
     width: 100%;
     height: 100%;
+
     flex-wrap: wrap;
+
     flex-direction: row;
+
     gap: 25px;
 }
 
-a {
-    width: 100%;
-    height: 100%;
-}
-
 figure {
+    display: flex;
+
     width: 300px;
     height: 300px;
-    display: flex;
+
     border-radius: 10px;
     border: solid 2px #B320CC;
+
     flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+figure:hover {
+    filter: drop-shadow(0px 2px 2px #FFFFFF);
+}
+
+a {
+    cursor: pointer;
+
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    flex-direction: column;
+
     justify-content: center;
     align-items: center;
 }
 
 img {
+    width: 200px;
+    height: 200px;
+
     border-radius: 10px;
     border: solid 2px #072B89;
-    width: 250px;
-    height: 250px;
 }
 
 figcaption {
     display: flex;
+
+    width: 100%;
+    height: 75px;
 
     flex-direction: column;
 
@@ -41,14 +71,14 @@ figcaption {
 
 h4 {
     font-family: 'Segoe UI';
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 27.5px;
     color: #FFFFFF;
 }
 
 h5 {
     font-family: 'Segoe UI';
-    font-weight: 500;
+    font-weight: 600;
     font-size: 12.5px;
     color: #FFFFFF;
 }

@@ -1,0 +1,38 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/sign_in.css' %}" />
+    {% endblock %}
+
+<section>
+    <form method="post">
+        {% csrf_token %}
+
+        <div>
+            <h3>Sign in</h3>
+        </div>
+        
+        <div>
+            <label for="username">User name</label>
+            <input type="text" id="id_username" name="username" value="{{ form.username.value }}">
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="id_password" name="password" value="{{ form.password.value }}">
+        </div>
+
+        <div>
+            <input type="submit" value="Sign in">
+        </div>
+
+        <div>
+            <a href="{% url 'sign_up' %}">Do you not have an account yet? Sign up!</a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

@@ -105,14 +105,15 @@
   <ItemGroup>
     <Content Include="app\static\app\photo\we.jpg" />
     <Content Include="app\static\app\photo\we1.png" />
+    <Content Include="app\static\app\styles\home.css" />
     <Content Include="app\static\app\styles\about.css" />
     <Content Include="app\static\app\styles\catalog.css" />
     <Content Include="app\static\app\styles\contact.css" />
     <Content Include="app\static\app\styles\layout.css" />
     <Content Include="app\static\app\styles\navmenu.css" />
     <Content Include="app\static\app\styles\panel.css" />
-    <Content Include="app\static\app\styles\signin.css" />
-    <Content Include="app\static\app\styles\signup.css" />
+    <Content Include="app\static\app\styles\sign_in.css" />
+    <Content Include="app\static\app\styles\sign_up.css" />
     <Content Include="app\static\app\styles\songs\songslist.css" />
     <Content Include="app\static\fonts\css\animation.css" />
     <Content Include="app\static\fonts\css\fontello-codes.css" />
@@ -137,8 +138,8 @@
     <Content Include="app\templates\app\navmenu.html" />
     <Content Include="app\templates\app\products\products.html" />
     <Content Include="app\templates\app\rentals\rentals.html" />
-    <Content Include="app\templates\app\signin.html" />
-    <Content Include="app\templates\app\signup.html" />
+    <Content Include="app\templates\app\sign_in.html" />
+    <Content Include="app\templates\app\sign_up.html" />
     <Content Include="app\templates\app\songs\songs.html" />
     <Content Include="app\templates\app\songs\songslist.html" />
   </ItemGroup>

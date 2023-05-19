@@ -1,15 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en-us">
 <head>
     <meta charset="utf-8" />
-    <title>Layout</title>
     <link rel="stylesheet" href="{% static 'app/styles/layout.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'fonts/css/fontello.css' %}">
+    <title>Sono</title>
 </head>
 <body>
-    {% include 'app/navmenu.html' %}
+    {% include 'app/navmenu.html' with group=group %}
     <main>
         {% block content %}{% endblock %}
     </main>

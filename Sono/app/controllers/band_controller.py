@@ -26,4 +26,4 @@ def bands(request):
             band_service.delete_band(request.POST['id'])
             return redirect('bands')
 
-    return render(request, 'app/bands/bands.html', {'bands': bands, 'form': form})
+    return render(request, 'app/bands/bands.html', {'bands': bands, 'form': form, 'group': request.user.groups.first().name if request.user.groups.first() else None})
