@@ -1,0 +1,32 @@
+{% extends "app/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% block css %}
+<link rel="stylesheet" href="{% static 'app/styles/history.css' %}" />
+    {% endblock %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Product Code</th>
+            <th>Reservation Date</th>
+            <th>Expire Date</th>
+            <th>Return Date</th>
+            <th>Album Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.rental.reservation_date }}</td>
+            <td>{{ product.rental.reservation_expire_date }}</td>
+            <td>{{ product.rental.return_date }}</td>
+            <td>{{ product.album.title }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

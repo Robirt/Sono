@@ -46,4 +46,4 @@ class RentalForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['album', 'code', 'rental']
+        fields = ['album', 'code']

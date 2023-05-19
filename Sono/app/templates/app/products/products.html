@@ -75,7 +75,7 @@
             selectedRow = row;
 
             idInput.value = selectedRow.cells[0].textContent;
-            albumInput.value = selectedRow.cells[1].textContent;
+            document.querySelectorAll('#albumInput option').forEach(function (option) { if (option.text === selectedRow.cells[1].textContent) option.selected = true; });
             codeInput.value = selectedRow.cells[2].textContent;
             rentalInput.value = selectedRow.cells[3].textContent;
 

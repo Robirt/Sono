@@ -7,6 +7,9 @@ song_service: SongService = SongService()
 album_service: AlbumService = AlbumService()
 
 def songs(request):
+    if request.user.groups.first().name == 'Users':
+        return redirect('home')
+
     songs = song_service.get_songs();
 
     form = SongForm()

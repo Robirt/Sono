@@ -7,6 +7,9 @@ band_member_service: BandMemberService = BandMemberService()
 bands_service: BandService = BandService()
 
 def band_members(request):
+    if request.user.groups.first().name == 'Users':
+        return redirect('home')
+
     band_members = band_member_service.get_band_members()
 
     form = BandMemberForm()

@@ -25,7 +25,7 @@ nav > h3 {
     color: #B320CC;
 }
 
-ul {
+nav > ul {
     display: flex;
 
     flex-direction: row;
@@ -33,26 +33,26 @@ ul {
     list-style: none;
 }
 
-li {
-    width: 100px;
+ul > li {
+    width: 125px;
 
     text-align: center;
 }
 
-a {
+li > a {
     text-align: center;
     font-family: 'Segoe UI';
     font-weight: 600;
     font-size: 17.5px;
 }
 
-li:hover {
+ul > li:hover {
     text-shadow: 2px 5px 5px #FFFFFF;
     
     transition: 0.1s ease-in-out;
 }
 
-a:active, a:visited, a:link {
+li > a:active, li > a:visited, li > a:link {
     text-decoration:none;
     color:white;
 }

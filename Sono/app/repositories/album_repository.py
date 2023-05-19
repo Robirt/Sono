@@ -3,7 +3,7 @@ from ..models import Album
 
 class AlbumRepository():
     def get_albums(self) -> QuerySet[Album]:
-        return list(Album.objects.all().prefetch_related('band'))
+        return Album.objects.all().prefetch_related('band')
 
     def get_album_by_id(self, id: int) -> Album:
         return Album.objects.get(id=id)

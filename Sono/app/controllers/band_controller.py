@@ -5,6 +5,9 @@ from ..forms import BandForm
 band_service: BandService = BandService()
 
 def bands(request):
+    if request.user.groups.first().name == 'Users':
+        return redirect('home')
+
     bands = band_service.get_bands()
 
     form = BandForm()
